@@ -1,0 +1,264 @@
+ /*
+Sky Blue (Crayola) (#6DE5E7),
+Bisque (#F7E0C6),
+Light Goldenrod Yellow (#FBF6D6) and
+Aero Blue (#C8F1E6).
+*/
+img{
+    vertical-align: middle;
+    display: inline-block;
+}
+body{
+    background-color: #FBF6D6;
+    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Hiragino Kaku Gothic ProN,"メイリオ",meiryo,sans-serif;
+
+}
+header{
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0px 0px 2px rgba(0,0,0,.8);
+    position: fixed;
+    top: 0px;
+}
+header .into{
+    max-width: 1200px;
+    min-width: 640px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.menu{
+    width:50%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: flex;
+}
+.menu li{
+    margin-left: 20px;
+    height:0.9em;
+    line-height: 0.9em;
+}
+.menu li span{
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1em;
+    font-size:0.8rem;
+    margin-left: 0.3em;
+}
+.menu li:first-child{
+    margin-left: 0;
+}
+.homeicon{
+    position: absolute;
+    left: 50%;
+    right: 50%;
+    height: 70%;
+    top: 8%;
+}
+.homeicon img{
+    height: 100%;
+}
+
+header .rightarea{
+    width: 40%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    text-align:right;
+    display: flex;
+}
+header .rightarea .searchbox{
+    position: relative;
+    width:50%;
+    height:100%;
+}
+header .rightarea .searchbox input[type="search"]{
+    width: 100%;
+    height: 70%;
+    border: 1px #999 solid;
+    padding: 5px 10px 5px 10px;
+    border-radius: 20px 20px 20px 20px;
+}
+header .rightarea .searchbox .searchicon{
+    position:absolute;
+    top: 0;
+    right: 5%;
+    width: 18px;
+}
+
+header .rightarea .searchbox .searchicon img{
+    width: 100%;
+}
+.accounticon{
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    width: 10%;
+    text-align: center;
+}
+header .rightarea .accounticon{
+    margin-left:5%;
+}
+.accounticon img{
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+
+}
+header .rightarea .tweetbtn{
+    position:relative;
+    width: 25%;
+    height: 80%;
+    margin-top: 5px;
+    left: 10%;
+    background-color: #aaa;
+    color: #fff;
+    font-weight: bold;
+    border: 1px #ccc solid;
+    border-radius: 20px 20px 20px 20px;
+
+}
+.main{
+
+    width: 1200px;
+    margin: 0 auto;
+    padding-top: 10px;
+    height: 200vh;
+    display: flex;
+}
+.main .left{
+    margin-left: 10px;
+    width: 300px;
+
+}
+
+.main .left .mydataarea{
+    width: 100%;
+    border-radius: 2px;
+    background-color:#fff;
+}
+.main .left .mydataarea .data{
+    position: relative;
+
+}
+.main .left .mydataarea .data .accounticon{
+    position:absolute;
+    width: 70px;
+    height: 70px;
+    left: 10px;
+    top: -35px;
+}
+.main .left .mydataarea .data .accounticon img{
+    width: 100%;
+    height: 100%;
+}
+.main .left .mydataarea .img{
+    height: 100px;
+    overflow: hidden;
+}
+
+.main .left .mydataarea .img img{
+    width: 100%;
+    object-fit: cover;
+}
+
+
+.main .left .mydataarea .data .name{
+    padding-top:5px;
+    padding-left:90px;
+    width: 100%;
+}
+.main .center{
+    width: 600px;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: #f00;
+}
+.main .center .tweetline{
+    width: 100%;
+    border-radius: 2px;
+    background-color: #efefef;
+    display: flex;
+    padding:10px 10px 10px 10px;
+}
+.main .center .tweetline input[type="text"]{
+    width: 85%;
+    border-radius: 5px;
+    border: 1px #ccc solid;
+    padding-left: 0.5em;
+}
+
+
+.main .right{
+    width: 300px;
+    margin-right:10px;
+    background-color: #0f0;
+}
+
+@media screen and (max-width:1200px){
+    .menu{
+        margin-left:1%;
+    }
+    header .rightarea{
+        margin-right: 1%;
+    }
+    .main{
+        width: 900px;
+    }
+    .main .right{
+        display: none;
+    }
+
+}
+
+@media screen and (max-width:1000px){
+}
+@media screen and (max-width: 900px){
+    .main{
+        width: 900px;
+    }
+
+    .menu li span{
+        display: none;
+    }
+    header .rightarea .tweetbtn{
+        display: none;
+    }
+
+    header .rightarea .searchbox{
+        width:85%;
+    }
+    header .rightarea .accounticon{
+        right: 0;
+        width: 15%;
+    }
+}
+@media screen and (max-width: 640px){
+    .main .left{
+        display: none;
+    }
+    .main{
+        width: 100%;
+    }
+    .main .center{
+        width: 100%;
+    }
+    header .into{
+        max-width: 100%;
+        min-width: 100%;
+        width: 100% !important;
+    }
+    .searchbox{
+        display: none;
+    }
+    header .rightarea .accounticon{
+        width: 100%;
+    }
+
+}
+@media screen and (max-width: 400px){
+    .homeicon{
+        display: none;
+    }
+}
