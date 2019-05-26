@@ -1,3 +1,11 @@
+button{
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+        outline: none;
+        padding: 0;
+        appearance: none;
+}
  /*
 Sky Blue (Crayola) (#6DE5E7),
 Bisque (#F7E0C6),
@@ -177,25 +185,73 @@ header .rightarea .tweetbtn{
 }
 .main .center .tweetline{
     width: 100%;
-    border-radius: 2px;
+    border-radius: 2px 2px 0px 0px;
     background-color: #efefef;
-    display: flex;
     padding:10px 10px 10px 10px;
 }
-.main .center .tweetline input[type="text"]{
-    width: 85%;
-    border-radius: 5px;
-    border: 1px #ccc solid;
-    padding-left: 0.5em;
-}
+.main .center .tweetline div:first-child{
+    display: flex;
 
+}
+.tweetbox{
+    width: 85%;
+    border: 1px #ccc solid;
+    border-radius: 5px;
+}
+#tweet_input{
+    border: 1px #ccc solid;
+    padding: 0.5em;
+    font-size:0.5em;
+    background-color: #fff;
+    display: block;
+    border-radius: 5px;
+}
+#tweet_input.focus{
+    border-radius: 5px 5px 0px 0px;
+    min-height: 10em;
+    outline: none;
+}
+#imgup{
+    display: none;
+}
+#btnline{
+    margin-top:0.3rem;
+}
+#imgupbtn{
+    border: none;
+    background: none;
+    width: 1.5rem;
+    height: 1.5rem;
+
+}
+#imgupbtn{
+    vertical-align: top;
+}
+#imgup_content{
+    width: 100%;
+    position: relative;
+    bottom: 0;
+    padding-top:0.5rem;
+    padding-bottom: 0.5rem;
+    display: none;
+}
+#imgup_content img{
+    border-radius: 5px;
+    width: 10vw;
+    height: 10vw;
+    object-fit: cover;
+    margin-left: 0.5rem;
+}
+.btnline{
+    width: 85%;
+    margin-left: 10%;
+}
 
 .main .right{
     width: 300px;
     margin-right:10px;
     background-color: #0f0;
 }
-
 @media screen and (max-width:1200px){
     .menu{
         margin-left:1%;

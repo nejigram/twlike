@@ -34,6 +34,7 @@
     </div>
 </header>
 <div class="main" id="main">
+
     <div class="left">
         <div class="mydataarea">
             <div class="img">
@@ -52,16 +53,16 @@
                 </div>
                 <div class="flex pt_1 pl_0_5 pb_1">
                     <div class="w33">
-                        <p class="fs_0_6 lh_1">ツイート</p>
-                        <p class="fs_1 lh_1 bld">111</p>
+                        <p class="fs_0_5 lh_1">ツイート</p>
+                        <p class="fs_0_8 lh_1 bld">111</p>
                     </div>
                     <div class="w33">
-                        <p class="fs_0_6 lh_1">ツイート</p>
-                        <p class="fs_1 lh_1 bld">111</p>
+                        <p class="fs_0_5 lh_1">ツイート</p>
+                        <p class="fs_0_8 lh_1 bld">111</p>
                     </div>
                     <div class="w33">
-                        <p class="fs_0_6 lh_1">ツイート</p>
-                        <p class="fs_1 lh_1 bld">111</p>
+                        <p class="fs_0_5 lh_1">ツイート</p>
+                        <p class="fs_0_8 lh_1 bld">111</p>
                     </div>
                 </div>
             </div>
@@ -69,12 +70,21 @@
     </div>
     <div class="center">
         <div class="tweetline">
-            <div class="accounticon">
-                <img src="../../assets/images/animal/01-min.jpg">
+            <div>
+                <div class="accounticon">
+                    <img src="../../assets/images/animal/01-min.jpg">
+                </div>
+                <div class="tweetbox">
+                    <div id="tweet_input" contenteditable="true">
+                    </div>
+                    <p id="imgup_content"></p>
+                </div>
             </div>
-            <input type="text" placeholder="いまどうしてる？"/>
+            <div class="btnline" id="btnline">
+                <button id="imgupbtn"><img src="../../assets/images/icon/300.png" width="100%"></button>
+                <button>ツイート</button>
+            </div>
         </div>
-
     center
     </div>
     <div class="right">
@@ -83,5 +93,6 @@
 
 </div>
 
+<input type="file" id="imgup" multiple>
 </body>
 <html>
