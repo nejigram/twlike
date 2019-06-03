@@ -6,25 +6,25 @@
 
 <link rel="shortcut icon" type="image/x-icon" href="//www.nejigram.com/assets/img/itemicon.ico" />
 <title>twlike</title>
-<link rel='stylesheet' href='../../css/style.css?<?=time();?>' type='text/css' />
+<link rel='stylesheet' href='../../css/default_style.css?<?=time();?>' type='text/css' />
 <link rel='stylesheet' href='css/style.css?<?=time();?>' type='text/css' />
-<script src='js/script.js' async></script>
+<script src='js/script.js?<?=time();?>' async></script>
 </head>
 <body>
-<header>
+<header id="header">
     <div class="into">
         <ul class="menu">
-        <li><img src="../../assets/images/icon/001.png" height="100%"><span>ホーム</span></li>
-        <li><img src="../../assets/images/icon/003.png" height="100%"><span>モーメント</span></li>
-        <li><img src="../../assets/images/icon/019.png" height="100%"><span>通知</span></li>
-        <li><img src="../../assets/images/icon/001.png" height="100%"><span>メッセージ</span></li>
+        <li><img src="../../assets/images/icon/001.png"><span>ホーム</span></li>
+        <li><img src="../../assets/images/icon/064.png"><span>モーメント</span></li>
+        <li><img src="../../assets/images/icon/003.png"><span>通知</span></li>
+        <li><img src="../../assets/images/icon/019.png"><span>メッセージ</span></li>
         </ul>
         <div class="homeicon">
             <img src="../../assets/images/icon/158.png">
         </div>
         <div class="rightarea">
             <div class="searchbox">
-                <input type="search" placeholder="キーワード検索" class="searchbox"><span class="searchicon"><img src="../../assets/images/icon/087_1.png"></span>
+                <input type="search" placeholder="キーワード検索"><img src="../../assets/images/icon/087_1.png">
             </div>
             <div class="accounticon">
                 <img src="../../assets/images/animal/01-min.jpg">
@@ -40,59 +40,59 @@
             <div class="img">
                 <img src="../../assets/images/animal/02-min.jpg">
             </div>
-            <div class="data" id="left_mydataarea_data">
+            <div class="data">
                 <div class="accounticon">
                     <img src="../../assets/images/animal/01-min.jpg">
                 </div>
-                <div class="name">
-                    aaa
+                <div class="accountdata">
+                    <div class="name">
+                        aaa
+                    </div>
+                    <div class="disc">
+                        <p>まさしきねがいに　いさかうとも</p>
+                        <p>銀河のかなたに　　ともにわらい</p>
+                    </div>
                 </div>
-                <div class="fs_0_5 pl_0_5 mt_1">
-                    <p>まさしきねがいに　いさかうとも</p>
-                    <p>銀河のかなたに　　ともにわらい</p>
+            </div>
+            <div class="data2">
+                <div class="">
+                    <p class="">ツイート</p>
+                    <p class="">111</p>
                 </div>
-                <div class="flex pt_1 pl_0_5 pb_1">
-                    <div class="w33">
-                        <p class="fs_0_5 lh_1">ツイート</p>
-                        <p class="fs_0_8 lh_1 bld">111</p>
-                    </div>
-                    <div class="w33">
-                        <p class="fs_0_5 lh_1">ツイート</p>
-                        <p class="fs_0_8 lh_1 bld">111</p>
-                    </div>
-                    <div class="w33">
-                        <p class="fs_0_5 lh_1">ツイート</p>
-                        <p class="fs_0_8 lh_1 bld">111</p>
-                    </div>
+                <div class="">
+                    <p class="">ツイート</p>
+                    <p class="">111</p>
+                </div>
+                <div class="">
+                    <p class="">ツイート</p>
+                    <p class="">111</p>
                 </div>
             </div>
         </div>
     </div>
     <div class="center">
         <div class="tweetline">
-            <div>
+            <div class="sendarea">
                 <div class="accounticon">
                     <img src="../../assets/images/animal/01-min.jpg">
-                </div>
+                 </div>
                 <div class="tweetbox">
-                    <div id="tweet_input" contenteditable="true">
-                    </div>
+                    <div id="tweet_input" contenteditable="true"></div>
                     <p id="imgup_content"></p>
                 </div>
             </div>
             <div class="btnline" id="btnline">
                 <button id="imgupbtn"><img src="../../assets/images/icon/300.png" width="100%"></button>
-                <button>ツイート</button>
+                <button id="tweet_up">ツイート</button>
             </div>
         </div>
-    center
     </div>
     <div class="right">
     right
     </div>
 
 </div>
-
 <input type="file" id="imgup" multiple>
+<div class="reload" id="firstbox"><img src="../../assets/images/icon/loading01.gif"></div>
 </body>
 <html>
