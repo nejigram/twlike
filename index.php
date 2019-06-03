@@ -57,7 +57,7 @@
             <div class="data2">
                 <div class="">
                     <p class="">ツイート</p>
-                    <p class="">111</p>
+                    <p class=""><?=count(scandir("./tweet/")) -2;?></p>
                 </div>
                 <div class="">
                     <p class="">ツイート</p>
@@ -88,7 +88,7 @@
         </div>
     </div>
     <div class="right">
-    right
+        お知らせなど。
     </div>
 
 </div>

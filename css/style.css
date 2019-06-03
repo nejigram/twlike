@@ -310,7 +310,11 @@ header .rightarea .tweetbtn{
 .main .right{
     width: 300px;
     margin-right:10px;
-    background-color: #0f0;
+    border-radius: 2px;
+    background-color:#fff;
+    padding: 1em;
+
+
 }
 
 @media screen and (max-width:1200px){
