@@ -8,6 +8,23 @@
     background-color: #ccc;
 
 }
+.popupimgbox{
+    width: 100vw;
+    height: 100vh;
+    z-index: 2;
+    position:fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(255,255,255,0.5);
+    text-align: center;
+}
+.popupimgbox img{
+    max-width: 100%;
+    object-fit: cover;
+}
+.hide{
+    display: none;
+}
 .reload img{
     height: 5vh;
     width: 5vh;
@@ -299,12 +316,26 @@ header .rightarea .tweetbtn{
     text-align: center;
 }
 .onetweetbox .onetweet{
-    background-color:#ccc;
     width: 90%;
     padding:0.5em;
     margin-left:0.5em;
     font-size: 1.8em;
-    overflow:
+    border: 1px #ccc solid;
+    border-radius: 2px;
+}
+.onetweetbox .imgline{
+    padding:.5em;
+}
+.onetweetbox .imgline img{
+    width: 10vw;
+    height: 10vw;
+    max-width: 100px;
+    max-height: 100px;
+    min-width: 40px;
+    min-height: 40px;
+    object-fit: cover;
+    display: inline-block;
+    margin-right: 3%;
 }
 
 .main .right{

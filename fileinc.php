@@ -20,8 +20,18 @@ while($x < 10 && $y < count($files)){
         $ar = explode(".",$files[$y]);
         if($ar[0] < $lasttweet){
             $rdata["tweet"][$x]["date"] = date("Y-m-d H:i:s",floor($ar[0] * 0.0001));
+            $rdata["tweet"][$x]["microtime"] = $ar[0];
             $rdata["tweet"][$x]["content"] = nl2br(file_get_contents("tweet/" .$files[$y]));
             $rdata["lasttweet"] = $ar[0];
+            if(is_dir("./img/" .$ar["0"])){
+                $tmpfiles = scandir("./img/" .$ar["0"]);
+                foreach($tmpfiles as $tmp => $temp){
+                    if($temp !== "." && $temp !== ".."){
+                        $rdata["tweet"][$x]["imgs"][] = $temp;
+                    }
+
+                }
+            }
             $x++;
         }
     }

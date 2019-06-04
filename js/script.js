@@ -6,6 +6,7 @@ const imgupbtn = document.querySelector("#imgupbtn");
 const imgup = document.querySelector("#imgup");
 const tweet_up = document.querySelector("#tweet_up");
 const imgup_content = document.querySelector("#imgup_content");
+const popupimgbox = document.querySelector(".popupimgbox");
 
 let accounticon_img = document.querySelectorAll(".accounticon img");
 
@@ -36,6 +37,12 @@ window.addEventListener("resize",function(){
     }
     timer = setTimeout(obj_resize(),interval);
 });
+
+
+popupimgbox.addEventListener("click",function(){
+    this.classList.add("hide");
+});
+
 
 tweet_input.addEventListener("focus",function(){
     btnline.style.display = "block";
@@ -150,6 +157,25 @@ const tweetget = function(){
                 const onetweet = document.createElement("div");
                 onetweet.classList.add("onetweet");
                 onetweet.innerHTML = rdata.tweet[x].content;
+                if(rdata.tweet[x].imgs){
+                    const imgs = document.createElement("div");
+                    imgs.classList.add("imgline");
+
+                    for(let i = 0; i < rdata.tweet[x].imgs.length;i++){
+                        const tmpimg = document.createElement("img");
+                        tmpimg.src = "img/" + rdata.tweet[x].microtime + "/" + rdata.tweet[x].imgs[i];
+                        tmpimg.addEventListener("click",function(){
+                            popupimgbox.classList.remove("hide");
+                            console.log(popupimgbox.clientHeight);
+                            popupimgbox.firstElementChild.src = tmpimg.src;
+                            popupimgbox.firstElementChild.style.marginTop = ((popupimgbox.clientHeight - popupimgbox.firstElementChild.clientHeight) /2) + "px";
+                        });
+
+                        imgs.appendChild(tmpimg);
+
+                    }
+                    onetweet.appendChild(imgs);
+                }
                 onetweetbox.appendChild(accounticon);
                 onetweetbox.appendChild(onetweet);
                 document.querySelector(".center").appendChild(onetweetbox);
@@ -166,6 +192,6 @@ const obj_resize = function(){
         accounticon_img[x].height = accounticon_img[x].parentNode.clientHeight * 0.8;
     }
     mainbox.style.marginTop = header.clientHeight + "px";
-    document.querySelector("#firstbox").classList.remove("reload");
+    document.querySelector("#firstbox").classList.add("hide");
 
 }
