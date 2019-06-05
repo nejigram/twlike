@@ -16,7 +16,7 @@ const
     imgnext = document.querySelector("#imgnext");
 
 let
-    popupimgbox = document.querySelector(".popupimgbox"),
+    popupimgbox = document.querySelector("#popupimgbox"),
     accounticon_img = document.querySelectorAll(".accounticon img"),
     imgup_file = [],
     formdata = new FormData(),
@@ -31,7 +31,7 @@ window.addEventListener("load",function(){
 });
 window.addEventListener("scroll",function(){
     bottomget();
-});
+},{passive:true});
 
 
 window.addEventListener("resize",function(){
@@ -219,26 +219,33 @@ const set_popupimg = function(src,idx){
         return false;
     }
     set_popupimg_flg = true;
+    popupimgbox = "";
+    popupimgbox = document.querySelector("#popupimgbox");
+
     popupimgbox.firstElementChild.src = src;
+    popupimgbox.firstElementChild.addEventListener("load",function(){
+        popupimgbox.firstElementChild.style.marginTop = "0px";
+        popupimgbox.firstElementChild.style.marginTop = ((popupimgbox.clientHeight - popupimgbox.firstElementChild.clientHeight) /2) + "px";
+        popupimgdata.now_idx = parseInt(idx);
 
-    popupimgbox.firstElementChild.style.marginTop = "0px";
-    popupimgbox.firstElementChild.style.marginTop = ((popupimgbox.clientHeight - popupimgbox.firstElementChild.clientHeight) /2) + "px";
-    popupimgdata.now_idx = parseInt(idx);
+        imgprev.style.opacity = 1;
+        imgnext.style.opacity = 1;
+        if(popupimgdata.now_idx === 0){
+            imgprev.style.opacity = 0.2;
+        }
+        if(popupimgdata.idxmax <= popupimgdata.now_idx){
+            imgnext.style.opacity = 0.2;
+        }
+        set_popupimg_flg = false;
 
-    imgprev.style.opacity = 1;
-    imgnext.style.opacity = 1;
-    if(popupimgdata.now_idx === 0){
-        imgprev.style.opacity = 0.2;
-    }
-    if(popupimgdata.idxmax <= popupimgdata.now_idx){
-        imgnext.style.opacity = 0.2;
-    }
-    set_popupimg_flg = false;
+    });
+
 }
 
 
 const obj_resize = function(){
-    popupimgbox = document.querySelector(".popupimgbox");
+    popupimgbox = "";
+    popupimgbox = document.querySelector("#popupimgbox");
     for(let x = 0;x < accounticon_img.length;x++){
         accounticon_img[x].width = accounticon_img[x].parentNode.clientHeight * 0.8;
         accounticon_img[x].height = accounticon_img[x].parentNode.clientHeight * 0.8;

@@ -94,7 +94,7 @@
 </div>
 <input type="file" id="imgup" multiple>
 <div class="reload" id="firstbox"><img src="../../assets/images/icon/loading01.gif"></div>
-<div class="popupimgbox hide">
+<div class="popupimgbox hide" id="popupimgbox">
     <img src="../../assets/images/animal/01-min.jpg">
     <div id="imgprevbox"><img src="../../assets/images/icon/287.png" class="left" id="imgprev"></div><div id="imgnextbox"><img src="../../assets/images/icon/286.png" class="right" id="imgnext"></div>
 </div>
