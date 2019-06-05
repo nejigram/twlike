@@ -7,7 +7,6 @@ const
     imgup = document.querySelector("#imgup"),
     tweet_up = document.querySelector("#tweet_up"),
     imgup_content = document.querySelector("#imgup_content"),
-    popupimgbox = document.querySelector(".popupimgbox"),
     interval = Math.floor(1000 / 60 * 10),
 
     __click = window.ontouchstart===null?"touchstart":"click",
@@ -17,6 +16,7 @@ const
     imgnext = document.querySelector("#imgnext");
 
 let
+    popupimgbox = document.querySelector(".popupimgbox"),
     accounticon_img = document.querySelectorAll(".accounticon img"),
     imgup_file = [],
     formdata = new FormData(),
@@ -48,13 +48,15 @@ popupimgbox.addEventListener(__click,function(){
 
 
 tweet_input.addEventListener("focus",function(){
-    btnline.style.display = "block";
+    btnline.classList.remove("hide");
+//    btnline.style.display = "block";
     tweet_input.classList.add("focus");
 });
 tweet_input.addEventListener("blur",function(){
     if(tweet_input.innerHTML.length === 0 && imgup_file.length === 0){
         tweet_input.classList.remove("focus");
-        btnline.style.display = "none";
+//        btnline.style.display = "none";
+        btnline.classList.add("hide");
     }
 });
 
@@ -116,7 +118,6 @@ imgprevbox.addEventListener(__click,function(e){
         return false;
     }
     popupimgdata.now_idx -= 1;
-
     set_popupimg(popupimgdata.ar[popupimgdata.now][popupimgdata.now_idx],popupimgdata.now_idx);
     e.stopPropagation();
 });
@@ -186,6 +187,11 @@ const tweetget = function(){
                     for(i = 0; i < rdata.tweet[x].imgs.length;i++){
                         const tmpimg = document.createElement("img");
                         tmpimg.src = "img/" + rdata.tweet[x].microtime + "/" + rdata.tweet[x].imgs[i];
+                        imgs.setAttribute("data-idxmax",i);
+                        tmpimg.setAttribute("data-idx",i);
+                        imgs.appendChild(tmpimg);
+                        ar[rdata.tweet[x].microtime].push(tmpimg.src);
+
                         tmpimg.addEventListener(__click,function(){
                             popupimgbox.classList.remove("hide");
                             popupimgdata.idxmax = tmpimg.parentNode.getAttribute("data-idxmax");
@@ -193,10 +199,6 @@ const tweetget = function(){
                             set_popupimg(tmpimg.src,tmpimg.getAttribute("data-idx"));
 
                         });
-                        tmpimg.setAttribute("data-idx",i);
-                        imgs.appendChild(tmpimg);
-                        ar[rdata.tweet[x].microtime].push(tmpimg.src);
-                        imgs.setAttribute("data-idxmax",i);
                     }
                     onetweet.appendChild(imgs);
                 }
@@ -211,9 +213,15 @@ const tweetget = function(){
         }
     }
 }
-
+let set_popupimg_flg = false;
 const set_popupimg = function(src,idx){
+    if(set_popupimg_flg){
+        return false;
+    }
+    set_popupimg_flg = true;
     popupimgbox.firstElementChild.src = src;
+
+    popupimgbox.firstElementChild.style.marginTop = "0px";
     popupimgbox.firstElementChild.style.marginTop = ((popupimgbox.clientHeight - popupimgbox.firstElementChild.clientHeight) /2) + "px";
     popupimgdata.now_idx = parseInt(idx);
 
@@ -225,17 +233,19 @@ const set_popupimg = function(src,idx){
     if(popupimgdata.idxmax <= popupimgdata.now_idx){
         imgnext.style.opacity = 0.2;
     }
-
+    set_popupimg_flg = false;
 }
 
 
 const obj_resize = function(){
+    popupimgbox = document.querySelector(".popupimgbox");
     for(let x = 0;x < accounticon_img.length;x++){
         accounticon_img[x].width = accounticon_img[x].parentNode.clientHeight * 0.8;
         accounticon_img[x].height = accounticon_img[x].parentNode.clientHeight * 0.8;
     }
     mainbox.style.marginTop = header.clientHeight + "px";
     document.querySelector("#firstbox").classList.add("hide");
+    popupimgbox.classList.add("hide");
 
 }
 const bottomget = function(){

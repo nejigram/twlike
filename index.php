@@ -81,7 +81,7 @@
                     <p id="imgup_content"></p>
                 </div>
             </div>
-            <div class="btnline" id="btnline">
+            <div class="btnline hide" id="btnline">
                 <button id="imgupbtn"><img src="../../assets/images/icon/300.png" width="100%"></button>
                 <button id="tweet_up">ツイート</button>
             </div>
