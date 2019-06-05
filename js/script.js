@@ -1,36 +1,39 @@
-const header = document.querySelector("#header");
-const mainbox = document.querySelector("#main");
-const tweet_input = document.querySelector("#tweet_input");
-const btnline = document.querySelector("#btnline");
-const imgupbtn = document.querySelector("#imgupbtn");
-const imgup = document.querySelector("#imgup");
-const tweet_up = document.querySelector("#tweet_up");
-const imgup_content = document.querySelector("#imgup_content");
-const popupimgbox = document.querySelector(".popupimgbox");
+const
+    header = document.querySelector("#header"),
+    mainbox = document.querySelector("#main");
+    tweet_input = document.querySelector("#tweet_input"),
+    btnline = document.querySelector("#btnline"),
+    imgupbtn = document.querySelector("#imgupbtn"),
+    imgup = document.querySelector("#imgup"),
+    tweet_up = document.querySelector("#tweet_up"),
+    imgup_content = document.querySelector("#imgup_content"),
+    popupimgbox = document.querySelector(".popupimgbox"),
+    interval = Math.floor(1000 / 60 * 10),
 
-let accounticon_img = document.querySelectorAll(".accounticon img");
+    __click = window.ontouchstart===null?"touchstart":"click",
+    imgprevbox = document.querySelector("#imgprevbox"),
+    imgnextbox = document.querySelector("#imgnextbox"),
+    imgprev = document.querySelector("#imgprev"),
+    imgnext = document.querySelector("#imgnext");
 
-let imgup_file = [];
-let formdata = new FormData();
-let now_tweetget_flg = false;
-let lasttweet = 0;
+let
+    accounticon_img = document.querySelectorAll(".accounticon img"),
+    imgup_file = [],
+    formdata = new FormData(),
+    now_tweetget_flg = false,
+    lasttweet = 0,
+    timer,
+    popupimgdata = {};
 
 window.addEventListener("load",function(){
     obj_resize();
     tweetget();
 });
 window.addEventListener("scroll",function(){
-    const contentheight = document.body.clientHeight;
-    const scroll_y_bottom = window.scrollY + window.innerHeight;
-    if(contentheight < scroll_y_bottom && !now_tweetget_flg){
-        now_tweetget_flg = true;
-        tweetget();
-    }
+    bottomget();
 });
 
 
-const interval = Math.floor(1000 / 60 * 10);
-let timer;
 window.addEventListener("resize",function(){
     if(timer !== false){
         clearTimeout(timer);
@@ -39,7 +42,7 @@ window.addEventListener("resize",function(){
 });
 
 
-popupimgbox.addEventListener("click",function(){
+popupimgbox.addEventListener(__click,function(){
     this.classList.add("hide");
 });
 
@@ -77,7 +80,7 @@ imgup.addEventListener("change",function(e){
             tmpspan.classList.add("imgup_delete");
             imgup_content.appendChild(tmpimg);
             imgup_content.appendChild(tmpspan);
-            tmpspan.addEventListener("click",imgup_delete);
+            tmpspan.addEventListener(__click,imgup_delete);
 
         };
         reader.readAsDataURL(this.files[x]);
@@ -90,7 +93,7 @@ imgup.addEventListener("change",function(e){
     }
 });
 
-tweet_up.addEventListener("click",function(){
+tweet_up.addEventListener(__click,function(){
     for(let x = 0;x < imgup_file.length;x++){
         formdata.append("imgup_file[]",imgup_file[x]);
 
@@ -101,18 +104,32 @@ tweet_up.addEventListener("click",function(){
     request.send(formdata);
     request.onreadystatechange = function(){
     if ((request.readyState == 4) && (request.status == 200)) {
-/*            formdata = new FormData();
-            imgup_content.innerHTML = "";
-            imgup_content.style.display = "none";
-            imgup.value = "";
-            tweet_input.innerHTML = "";
-            tweet_input.classList.remove("focus");
-            imgup_file = [];
-*/
             location.reload();
         }
     };
 })
+
+
+imgprevbox.addEventListener(__click,function(e){
+    if(popupimgdata.now_idx <= 0){
+        e.stopPropagation();
+        return false;
+    }
+    popupimgdata.now_idx -= 1;
+
+    set_popupimg(popupimgdata.ar[popupimgdata.now][popupimgdata.now_idx],popupimgdata.now_idx);
+    e.stopPropagation();
+});
+imgnextbox.addEventListener(__click,function(e){
+    if(popupimgdata.idxmax <= popupimgdata.now_idx){
+        e.stopPropagation();
+        return false;
+    }
+    popupimgdata.now_idx += 1;
+    set_popupimg(popupimgdata.ar[popupimgdata.now][popupimgdata.now_idx],popupimgdata.now_idx);
+    e.stopPropagation();
+});
+
 const imgup_delete = function(){
     const idx = [].indexOf.call(document.querySelectorAll(".imgup_delete"),this);
     imgup_file.splice(idx,1);
@@ -145,6 +162,7 @@ const tweetget = function(){
             }
             const rdata = JSON.parse(rq.responseText);
             lasttweet = rdata.lasttweet;
+            let ar = {};
             for(let x = 0;x < rdata.tweet.length;x++){
 
                 const onetweetbox = document.createElement("div");
@@ -157,22 +175,28 @@ const tweetget = function(){
                 const onetweet = document.createElement("div");
                 onetweet.classList.add("onetweet");
                 onetweet.innerHTML = rdata.tweet[x].content;
+
+
                 if(rdata.tweet[x].imgs){
+                    ar[rdata.tweet[x].microtime] = [];
+
                     const imgs = document.createElement("div");
                     imgs.classList.add("imgline");
-
-                    for(let i = 0; i < rdata.tweet[x].imgs.length;i++){
+                    let i = 0;
+                    for(i = 0; i < rdata.tweet[x].imgs.length;i++){
                         const tmpimg = document.createElement("img");
                         tmpimg.src = "img/" + rdata.tweet[x].microtime + "/" + rdata.tweet[x].imgs[i];
-                        tmpimg.addEventListener("click",function(){
+                        tmpimg.addEventListener(__click,function(){
                             popupimgbox.classList.remove("hide");
-                            console.log(popupimgbox.clientHeight);
-                            popupimgbox.firstElementChild.src = tmpimg.src;
-                            popupimgbox.firstElementChild.style.marginTop = ((popupimgbox.clientHeight - popupimgbox.firstElementChild.clientHeight) /2) + "px";
+                            popupimgdata.idxmax = tmpimg.parentNode.getAttribute("data-idxmax");
+                            popupimgdata.now = rdata.tweet[x].microtime;
+                            set_popupimg(tmpimg.src,tmpimg.getAttribute("data-idx"));
+
                         });
-
+                        tmpimg.setAttribute("data-idx",i);
                         imgs.appendChild(tmpimg);
-
+                        ar[rdata.tweet[x].microtime].push(tmpimg.src);
+                        imgs.setAttribute("data-idxmax",i);
                     }
                     onetweet.appendChild(imgs);
                 }
@@ -181,11 +205,30 @@ const tweetget = function(){
                 document.querySelector(".center").appendChild(onetweetbox);
                 now_tweetget_flg = false;
             }
+            popupimgdata.ar = ar;
             accounticon_img = document.querySelectorAll(".accounticon img");
             obj_resize();
         }
     }
 }
+
+const set_popupimg = function(src,idx){
+    popupimgbox.firstElementChild.src = src;
+    popupimgbox.firstElementChild.style.marginTop = ((popupimgbox.clientHeight - popupimgbox.firstElementChild.clientHeight) /2) + "px";
+    popupimgdata.now_idx = parseInt(idx);
+
+    imgprev.style.opacity = 1;
+    imgnext.style.opacity = 1;
+    if(popupimgdata.now_idx === 0){
+        imgprev.style.opacity = 0.2;
+    }
+    if(popupimgdata.idxmax <= popupimgdata.now_idx){
+        imgnext.style.opacity = 0.2;
+    }
+
+}
+
+
 const obj_resize = function(){
     for(let x = 0;x < accounticon_img.length;x++){
         accounticon_img[x].width = accounticon_img[x].parentNode.clientHeight * 0.8;
@@ -194,4 +237,12 @@ const obj_resize = function(){
     mainbox.style.marginTop = header.clientHeight + "px";
     document.querySelector("#firstbox").classList.add("hide");
 
+}
+const bottomget = function(){
+    const contentheight = document.body.clientHeight;
+    const scroll_y_bottom = window.scrollY + window.innerHeight;
+    if(contentheight < scroll_y_bottom && !now_tweetget_flg){
+        now_tweetget_flg = true;
+        tweetget();
+    }
 }

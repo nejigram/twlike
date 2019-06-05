@@ -8,23 +8,10 @@
     background-color: #ccc;
 
 }
-.popupimgbox{
-    width: 100vw;
-    height: 100vh;
-    z-index: 2;
-    position:fixed;
-    top: 0;
-    left: 0;
-    background-color: rgba(255,255,255,0.5);
-    text-align: center;
-}
-.popupimgbox img{
-    max-width: 100%;
-    object-fit: cover;
-}
 .hide{
     display: none;
 }
+
 .reload img{
     height: 5vh;
     width: 5vh;
@@ -348,6 +335,43 @@ header .rightarea .tweetbtn{
 
 }
 
+.popupimgbox{
+    width: 100vw;
+    height: 100vh;
+    z-index: 2;
+    position:fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(255,255,255,0.8);
+    text-align: center;
+}
+.popupimgbox img{
+    max-width: 100%;
+    max-height: 80%;
+    object-fit: cover;
+}
+
+#imgprevbox{
+    position: absolute;
+    top: 0;
+    width: 10%;
+    height: 100vh;
+    padding-top: 45vh;
+}
+
+#imgnextbox{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 10%;
+    height: 100vh;
+    padding-top: 45vh;
+}
+#imgprevbox:hover,#imgnextbox:hover{
+    background-color: rgba(0,0,0,0.2);
+}
+
+
 @media screen and (max-width:1200px){
     .menu{
         margin-left:1%;
@@ -413,6 +437,14 @@ header .rightarea .tweetbtn{
     }
     .onetweetbox .accounticon{
         width: 15%;
+    }
+
+
+    #imgprevbox:hover,#imgnextbox:hover{
+        background-color: transparent;
+    }
+    #imgprevbox,#imgnextbox{
+        width: 20%;
     }
 }
 @media screen and (max-width: 400px){
