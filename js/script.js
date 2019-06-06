@@ -72,7 +72,12 @@ imgup.addEventListener("change",function(e){
         if(imgup_file.length >= 4){
             break;
         }
+console.log(document.querySelector("#test")) ;
+document.querySelector("#test").innerHTML = this.files[x].name;
+
+
         imgup_file.push(this.files[x].name);
+
         const reader = new FileReader();
         reader.onload = function(e){
             const tmpimg = document.createElement("img");
