@@ -25,6 +25,8 @@ let
     timer,
     popupimgdata = {};
 
+popupimgdata.ar = {};
+
 window.addEventListener("load",function(){
     obj_resize();
     tweetget();
@@ -122,7 +124,7 @@ imgprevbox.addEventListener(__click,function(e){
         e.stopPropagation();
         return false;
     }
-    popupimgdata.now_idx -= 1;
+    popupimgdata.now_idx = popupimgdata.now_idx -1;
     set_popupimg(popupimgdata.ar[popupimgdata.now][popupimgdata.now_idx],popupimgdata.now_idx);
     e.stopPropagation();
 });
@@ -131,7 +133,7 @@ imgnextbox.addEventListener(__click,function(e){
         e.stopPropagation();
         return false;
     }
-    popupimgdata.now_idx += 1;
+    popupimgdata.now_idx = popupimgdata.now_idx + 1;
     set_popupimg(popupimgdata.ar[popupimgdata.now][popupimgdata.now_idx],popupimgdata.now_idx);
     e.stopPropagation();
 });
@@ -168,7 +170,6 @@ const tweetget = function(){
             }
             const rdata = JSON.parse(rq.responseText);
             lasttweet = rdata.lasttweet;
-            let ar = {};
             for(let x = 0;x < rdata.tweet.length;x++){
 
                 const onetweetbox = document.createElement("div");
@@ -184,7 +185,10 @@ const tweetget = function(){
 
 
                 if(rdata.tweet[x].imgs){
-                    ar[rdata.tweet[x].microtime] = [];
+                    let mt = rdata.tweet[x].microtime;
+                    popupimgdata.ar[mt] = [];
+
+                    popupimgdata.ar[rdata.tweet[x].microtime] = [];
 
                     const imgs = document.createElement("div");
                     imgs.classList.add("imgline");
@@ -195,8 +199,7 @@ const tweetget = function(){
                         imgs.setAttribute("data-idxmax",i);
                         tmpimg.setAttribute("data-idx",i);
                         imgs.appendChild(tmpimg);
-                        ar[rdata.tweet[x].microtime].push(tmpimg.src);
-
+                        popupimgdata.ar[mt].push(tmpimg.src);
                         tmpimg.addEventListener(__click,function(){
                             popupimgbox.classList.remove("hide");
                             popupimgdata.idxmax = tmpimg.parentNode.getAttribute("data-idxmax");
@@ -212,7 +215,6 @@ const tweetget = function(){
                 document.querySelector(".center").appendChild(onetweetbox);
                 now_tweetget_flg = false;
             }
-            popupimgdata.ar = ar;
             accounticon_img = document.querySelectorAll(".accounticon img");
             obj_resize();
         }
