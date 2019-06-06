@@ -71,7 +71,6 @@
         </div>
     </div>
     <div class="center">
-    <p id="test">aaa</p>
         <div class="tweetline">
             <div class="sendarea">
                 <div class="accounticon">
@@ -93,6 +92,8 @@
     </div>
 
 </div>
+
+
 <input type="file" id="imgup" multiple>
 <div class="reload" id="firstbox"><img src="../../assets/images/icon/loading01.gif"></div>
 <div class="popupimgbox hide" id="popupimgbox">

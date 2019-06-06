@@ -72,10 +72,6 @@ imgup.addEventListener("change",function(e){
         if(imgup_file.length >= 4){
             break;
         }
-console.log(document.querySelector("#test")) ;
-document.querySelector("#test").innerHTML = this.files[x].name;
-
-
         imgup_file.push(this.files[x].name);
 
         const reader = new FileReader();
@@ -91,8 +87,9 @@ document.querySelector("#test").innerHTML = this.files[x].name;
 
         };
         reader.readAsDataURL(this.files[x]);
-        formdata.append("file" + x,this.files[x]);
+
     };
+
     if(imgup_file.length > 0){
         imgup_content.style.display = "block";
         tweet_input.classList.add("focus");
@@ -100,14 +97,17 @@ document.querySelector("#test").innerHTML = this.files[x].name;
     }
 });
 
-tweet_up.addEventListener(__click,function(){
+tweet_up.addEventListener("click",function(){
     for(let x = 0;x < imgup_file.length;x++){
         formdata.append("imgup_file[]",imgup_file[x]);
-
     }
     formdata.append("tweet",tweet_input.innerHTML);
+    for(let x = 0;x < imgup.files.length;x++){
+        formdata.append("file"+x,imgup.files[x]);
+    }
+
     var request = new XMLHttpRequest();
-    request.open("POST", "imgup.php");
+    request.open("POST", "imgup.php",true);
     request.send(formdata);
     request.onreadystatechange = function(){
     if ((request.readyState == 4) && (request.status == 200)) {

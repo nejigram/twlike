@@ -1,7 +1,4 @@
 <?php
-echo "imgup.php";
-print_r($_FILES);
-print_r($_REQUEST);
 
 $ar = explode(" ",microtime());
 $nowtime = floor(($ar[0] + $ar[1]) * 10000);
