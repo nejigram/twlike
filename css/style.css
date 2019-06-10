@@ -64,9 +64,9 @@ header .into{
     margin-right: 2%;
 }
 .menu li img{
-    width: 2.5em;
-    height: 2.5em;
-    margin-top: 1em;
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-top: 1rem;
 }
 .menu li span{
     display: inline-block;
@@ -82,9 +82,9 @@ header .into{
     text-align: center;
 }
 .homeicon img{
-    width: 2.5em;
-    height: 2.5em;
-    margin-top: 1em;
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-top: 1rem;
 }
 
 header .rightarea{
